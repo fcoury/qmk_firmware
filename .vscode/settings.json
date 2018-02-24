@@ -8,9 +8,13 @@
         "**/*.hex": true
     },
     "files.associations": {
+        ".autotermrc": "ini",
+        ".env": "ini",
         "*.h": "c",
         "*.c": "c",
         "*.cpp": "cpp",
-        "*.hpp": "cpp"
+        "*.hpp": "cpp",
+        "system_error": "c",
+        "typeinfo": "c"
     }
 }
