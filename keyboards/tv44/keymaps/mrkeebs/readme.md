@@ -4,6 +4,8 @@ This differs quite a bit from the stock layout but leaves keys in a more familia
 
 This layout has also been customized to better suit macOS in a few ways: the Alt and Win keys have been refersed and both volume and brightness controls have been added to Layer 2.
 
+Finally, full LED support for revisions that use pin B7. Using the right Alt key (mapped to layer 4) with G (on/off), H (increase brightness), L (decrease) and K (breathing).
+
 ## Base Layer (0)
 
 The base layer is pretty simple, straight qwerty layout where available. Of note: /? is to the right of the arrow keys. Yes this is kinda weird sometimes, but you get used to it. Tab is tab when pressed and fn2 when held, Enter is the same. GESC is esc when used alone, but ~ when shifted. Tapping FN 1 is space
