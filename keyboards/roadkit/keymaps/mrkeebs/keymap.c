@@ -107,7 +107,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 uint32_t layer_state_set_user(uint32_t state) {
   switch (biton32(state)) {
     case _L1:
-      backlight_set(1);
+      backlight_set(2);
       break;
     case _NP:
       backlight_set(3);
