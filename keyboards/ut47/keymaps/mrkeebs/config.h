@@ -20,5 +20,8 @@
 #include "config_common.h"
 
 // place overrides here
+#define RGBLIGHT_ANIMATIONS
+#define RGB_DI_PIN D3    // The pin the LED strip is connected to
+#define RGBLED_NUM 7     // Number of LEDs in your strip
 
 #endif
