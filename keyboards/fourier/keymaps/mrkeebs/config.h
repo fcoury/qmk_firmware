@@ -27,5 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL
 #define PERMISSIVE_HOLD
+#define PREVENT_STUCK_MODIFIERS
 
 #endif
