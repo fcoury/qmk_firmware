@@ -53,9 +53,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //,----+----+----+----+----+----|----+----+----+----+----+----+----.
     GRV , 1  , 2  , 3  , 4  , 5  , 6  , 7  , 8  , 9  , 0  ,EQL ,   ,
  //|----`----`----`----`----`----|----`----`----`----`----`----`----|
-    RST  ,RHUI,RSAI,RVAI,VOLU,LBRC,RBRC,     , MINS, EQL ,QUOT,        ,
+    RST  ,RHUI,RSAI,RVAI,VOLU,LBRC,RBRC,     , MINS, EQL ,QUOT,     ,
  //|-----`----`----`----`----`----|----`----`----`----`----`--------|
-    RMOD   ,RHUD,RSAD,RVAD,VOLD,LCBR,RCBR, 1  , LCBR,RCBR, PGUP ,BSLS,
+    RMOD   ,RHUD,RSAD,RVAD,VOLD,LCBR,RCBR,    , LBRC,RBRC, PGUP ,BSLS,
  //|-------`----`----`----`----`----|----`----`----`----`----`------|
     RTOG ,    ,     ,    ,        ,  DEL   ,  0  ,HOME ,PGDN , END
  //`-----+----+-----+----+--------|--------+-----+-----+-----+------'
