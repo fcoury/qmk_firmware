@@ -1,5 +1,9 @@
 #include QMK_KEYBOARD_H
 
+#define BASE  0
+#define FN    1
+#define MEDIA 2
+
 #define _______ KC_TRNS
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
