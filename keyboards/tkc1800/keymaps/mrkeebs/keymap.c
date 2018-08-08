@@ -14,8 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "tkc1800.h"
-#include <stdio.h>
-#include <print.h>
 
 // Helpful defines
 #define ______ KC_TRNS
