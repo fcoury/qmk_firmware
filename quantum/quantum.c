@@ -147,8 +147,10 @@ void reset_keyboard(void) {
 #if defined(MIDI_ENABLE) && defined(MIDI_BASIC)
   process_midi_all_notes_off();
 #endif
-#if defined(AUDIO_ENABLE) && !defined(NO_MUSIC_MODE)
-  music_all_notes_off();
+#ifdef AUDIO_ENABLE
+  #ifndef NO_MUSIC_MODE
+    music_all_notes_off();
+  #endif
   uint16_t timer_start = timer_read();
   PLAY_SONG(goodbye_song);
   shutdown_user();
@@ -156,6 +158,7 @@ void reset_keyboard(void) {
     wait_ms(1);
   stop_all_notes();
 #else
+  shutdown_user();
   wait_ms(250);
 #endif
 // this is also done later in bootloader.c - not sure if it's neccesary here
@@ -312,8 +315,16 @@ bool process_record_quantum(keyrecord_t *record) {
   #endif
   #if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
   case RGB_TOG:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_toggle();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_MODE_FORWARD:
@@ -325,6 +336,9 @@ bool process_record_quantum(keyrecord_t *record) {
       else {
         rgblight_step();
       }
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_MODE_REVERSE:
@@ -336,36 +350,87 @@ bool process_record_quantum(keyrecord_t *record) {
       else {
         rgblight_step_reverse();
       }
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_HUI:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_increase_hue();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_HUD:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_decrease_hue();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_SAI:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_increase_sat();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_SAD:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_decrease_sat();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_VAI:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_increase_val();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_VAD:
+    // Split keyboards need to trigger on key-up for edge-case issue
+    #ifndef SPLIT_KEYBOARD
     if (record->event.pressed) {
+    #else
+    if (!record->event.pressed) {
+    #endif
       rgblight_decrease_val();
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_SPI:
@@ -381,6 +446,9 @@ bool process_record_quantum(keyrecord_t *record) {
   case RGB_MODE_PLAIN:
     if (record->event.pressed) {
       rgblight_mode(1);
+      #ifdef SPLIT_KEYBOARD
+          RGB_DIRTY = true;
+      #endif
     }
     return false;
   case RGB_MODE_BREATHE:
@@ -866,7 +934,7 @@ uint8_t rgb_matrix_task_counter = 0;
 #endif
 
 void matrix_scan_quantum() {
-  #if defined(AUDIO_ENABLE)
+  #if defined(AUDIO_ENABLE) && !defined(NO_MUSIC_MODE)
     matrix_scan_music();
   #endif
 
