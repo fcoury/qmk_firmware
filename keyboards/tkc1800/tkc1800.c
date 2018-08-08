@@ -59,6 +59,7 @@ void led_set_kb(uint8_t usb_led) {
         // Turn capslock off
 		PORTD &= ~(1<<3);
     }
+    #ifndef CUSTOM_LED_SCROLL_LOCK
 	if (usb_led & (1<<USB_LED_SCROLL_LOCK)) {
         // Turn scrolllock on
 	    PORTD |= (1<<4);
@@ -66,4 +67,5 @@ void led_set_kb(uint8_t usb_led) {
         // Turn scrolllock off
 		PORTD &= ~(1<<4);
     }
+    #endif
 }
