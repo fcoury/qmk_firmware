@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x0000
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    MrKeebs
-#define PRODUCT         Petit40
+#define PRODUCT         Holy40
 #define DESCRIPTION     Hand wired small 40%
 
 /* key matrix size */
@@ -41,9 +41,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
 */
-#define MATRIX_ROW_PINS { D0, D1, D2, D3 }
-#define MATRIX_COL_PINS { D4, D6, D7, B4, B5, B6, F7, F6, F5, F4, F1, F0 }
-#define UNUSED_PINS { B0, B1, B2, B3, B7, C6, C7, D5 }
+#define MATRIX_ROW_PINS { F0, F1, F4, F5 }
+#define MATRIX_COL_PINS { F6, F7, B6, B5, D7, D6, C7, C6, D3, D2, D1, D0 }
+#define UNUSED_PINS { D4, D5, B0, B1, B2, B3, B7 }
 
 /* COL2ROW, ROW2COL, or CUSTOM_MATRIX */
 #define DIODE_DIRECTION COL2ROW

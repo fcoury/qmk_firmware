@@ -13,8 +13,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef PETIT40_H
-#define PETIT40_H
+#ifndef HOLY40_H
+#define HOLY40_H
 
 #include "quantum.h"
 
