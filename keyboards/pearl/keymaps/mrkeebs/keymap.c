@@ -35,13 +35,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [2] = LAYOUT_spacebar(
       _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, RGB_M_SW, KC_UP,    _______, KC_DEL,
       _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, RGB_SPI, RGB_SPD, KC_LEFT,  KC_RIGHT, _______,
-      _______, KC_PSCR, KC_LSCR, _______, _______, _______, _______, _______, _______, KC_DOWN,  KC_DOWN,  _______,
+      _______, KC_PSCR, KC_LSCR, KC_MRWD, KC_MFFD, _______, _______, _______, _______, KC_DOWN,  KC_DOWN,  _______,
       _______, _______, _______, _______, _______
       ),
   [3] = LAYOUT_spacebar(
       _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, RGB_M_SW, _______, _______,  _______,
       _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, KC_PGUP, _______, _______,
-      _______, KC_PSCR, KC_LSCR, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_END, _______,
+      _______, KC_PSCR, KC_LSCR, KC_MRWD, KC_MFFD, _______, _______, _______, KC_HOME, KC_PGDN, KC_END, _______,
       _______, _______, _______, _______, _______
       ),
 };
