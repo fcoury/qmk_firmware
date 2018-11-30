@@ -52,13 +52,13 @@ EEP_RST, _______, _______, _______,                        _______,             
 ),
 };
 
-void led_set_user(uint8_t usb_led) {
-    // Turn LEDs On/Off for Caps Lock
-    if (host_keyboard_leds() & (1 << USB_LED_CAPS_LOCK)) {
-        rgblight_enable_noeeprom();
-        rgblight_sethsv_noeeprom(0, 0, 80);
-    } else {
-        rgblight_sethsv_noeeprom(0, 0, 80);
-        rgblight_disable_noeeprom();
-    }
-}
+// void led_set_user(uint8_t usb_led) {
+//     // Turn LEDs On/Off for Caps Lock
+//     if (host_keyboard_leds() & (1 << USB_LED_CAPS_LOCK)) {
+//         rgblight_enable_noeeprom();
+//         rgblight_sethsv_noeeprom(0, 0, 80);
+//     } else {
+//         rgblight_sethsv_noeeprom(0, 0, 80);
+//         rgblight_disable_noeeprom();
+//     }
+// }
