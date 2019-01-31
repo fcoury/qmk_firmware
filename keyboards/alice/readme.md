@@ -4,15 +4,16 @@
 
 An ergonomic 60% keyboard.
 
-Keyboard Maintainer: [Felipe Coury](https://github.com/fcoury)
-Hardware Supported: TGR Alice
-Hardware Availability: Group buy finished
+Keyboard Maintainer: [Felipe Coury](https://github.com/fcoury)  
+Hardware Supported: TGR Alice  
+Hardware Availability: Group buy finished  
 
 Make example for this keyboard (after setting up your build environment):
 
     make alice:default
 
 See [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) then the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information.
+
 
 ps2avrGB keyboard firmware
 ==========================
