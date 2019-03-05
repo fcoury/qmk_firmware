@@ -1,25 +1,22 @@
-/*
-Copyright 2019 Stanrc85
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #pragma once
 
-/* Include overwrites for specific keymap */
-
+// Include overwrites for specific keymap
 #define HS60_ANSI
 #undef  PRODUCT_ID
 #define PRODUCT_ID      0x4854
-#define TAPPING_TERM 200
-#define RETRO_TAPPING
+
+// disable backlight after timeout in minutes, 0 = no timeout
+#undef RGB_BACKLIGHT_DISABLE_AFTER_TIMEOUT
+#define RGB_BACKLIGHT_DISABLE_AFTER_TIMEOUT 10
+
+#undef RGB_BACKLIGHT_ALPHAS_MODS_ROW_0
+#undef RGB_BACKLIGHT_ALPHAS_MODS_ROW_1
+#undef RGB_BACKLIGHT_ALPHAS_MODS_ROW_2
+#undef RGB_BACKLIGHT_ALPHAS_MODS_ROW_3
+#undef RGB_BACKLIGHT_ALPHAS_MODS_ROW_4
+
+#define RGB_BACKLIGHT_ALPHAS_MODS_ROW_0 0b0010000000000001
+#define RGB_BACKLIGHT_ALPHAS_MODS_ROW_1 0b0000000000000001
+#define RGB_BACKLIGHT_ALPHAS_MODS_ROW_2 0b0011000000000001 //Setting \ key to "MOD" instead of "ALPHA" for lighting
+#define RGB_BACKLIGHT_ALPHAS_MODS_ROW_3 0b0010000000000001
+#define RGB_BACKLIGHT_ALPHAS_MODS_ROW_4 0b0011110000000111
