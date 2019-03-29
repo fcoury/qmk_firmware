@@ -13,4 +13,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <print.h>
+
 #include "chicory40.h"
+
+void matrix_init_kb(void) {
+  debug_enable=true;
+  printf("setting D5 on\n");
+  setPinOutput(D5);
+  writePinLow(D5);
+  matrix_init_user();
+}
+

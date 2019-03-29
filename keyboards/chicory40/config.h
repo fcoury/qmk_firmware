@@ -57,11 +57,60 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 )
 
 // Bluetooth Pins
-#define AdafruitBleResetPin D5
-#define AdafruitBleCSPin    D4
+// #define AdafruitBleResetPin B7
+#define AdafruitBleCSPin    D3
 #define AdafruitBleIRQPin   D2
 
 // Tested:
+// B7, D2, D3
+// B7, D3, D2
+// D2, B7, D3
+// D2, D3, B7
+// D3, B7, D2
+// D3, D2, B7
+
+// B3, D2, D3 * very slow
+// B3, D3, D2 * no
+// D2, B3, D3 * very slow
+// D2, D3, B3 * very slow
+// D3, B3, D2 * very slow
+// D3, D2, B3 * very slow
+
+// B2, D2, D3 * slow
+// B2, D3, D2 * normal
+// D2, B2, D3 * no typing
+// D2, D3, B2 * normal
+// D3, B2, D2 * normal
+// D3, D2, B2 * normal
+
+// B1, D2, D3 * slow typing
+// B1, D3, D2 * normal typing
+// D2, B1, D3 * slow
+// D2, D3, B1 * no typing
+// D3, B1, D2 * normal
+// D3, D2, B1 * no typing
+
+// B0, D2, D3 * slow typing
+// B0, D3, D2 * slow typing
+// D2, B0, D3 * slow typing
+// D2, D3, B0 * slow typing
+// D3, B0, D2 * normal typing
+// D3, D2, B0 * normal typing
+
+// D2, D3, D4 *
+// D2, D4, D3 *
+// D3, D2, D4
+// D3, D4, D2
+// D4, D2, D3
+// D4, D3, D2
+
+// D2, D3, D4 * gets spotty BT
+// D2, D4, D3 * gets spotty BT
+// D3, D2, D4 * gets normal typing, no BT
+// D3, D4, D2 * gets slow typing, no BT
+// D4, D2, D3 * gets normal typing, no BT
+// D4, D3, D2 * gets slow typing, no BT
+
 // D5, D2, D3 *
 // D5, D3, D2 *
 // D5, D4, D3 *
