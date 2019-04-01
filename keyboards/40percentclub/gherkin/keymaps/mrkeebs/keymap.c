@@ -84,18 +84,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MOD_MASK_LALT   (MOD_BIT(KC_LALT))
 #define MOD_MASK_LGUI   (MOD_BIT(KC_LGUI))
 
+uint16_t key_timer;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_ATAB:
       if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_LALT) {
-          SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_TAB));
-        // } else if (get_mods() & MOD_MASK_LGUI) {
-        //   SEND_STRING(SS_DOWN())
-        } else if (get_mods() & MOD_MASK_LGUI) {
-          SEND_STRING(SS_UP(X_LGUI) SS_DOWN(X_LALT) SS_TAP(X_A) SS_UP(X_LALT));
-        } else {
-          SEND_STRING(SS_TAP(X_A));
+        key_timer = timer_read();
+        register_code(KC_RCTL);
+      } else {
+        unregister_code(KC_RCTL);
+        if (timer_elapsed(key_timer) < TAPPING_TERM) {
+          if (get_mods() & MOD_MASK_LALT) {
+            SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_TAB));
+          } else if (get_mods() & MOD_MASK_LGUI) {
+            SEND_STRING(SS_UP(X_LGUI) SS_DOWN(X_LALT) SS_TAP(X_A) SS_UP(X_LALT));
+          } else {
+            SEND_STRING(SS_TAP(X_A));
+            return true;
+          }
         }
       };
       return false;
