@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [0] = LAYOUT_south_ortho_3x10(
     KC_QESC, KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_PBSP,
-    KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_LQUO, KC_LENT,
+    KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_LENT,
     KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_LBSP, KC_SPC,  KC_BCOM, KC_NDOT, KC_MSLS, KC_GRV
   ),
 
