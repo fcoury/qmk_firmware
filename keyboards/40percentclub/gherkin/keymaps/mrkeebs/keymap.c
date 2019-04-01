@@ -54,19 +54,20 @@ enum custom_key_codes {
 #define KC_XGUI MT(MOD_LCTL, KC_X)
 #define KC_CGUI MT(MOD_LGUI, KC_C)
 #define KC_VALT MT(MOD_LALT, KC_V)
+#define KC_GRSF MT(MOD_RSFT, KC_GRV)
 #define KC_LENT LT(1, KC_ENT)
 #define KC_LBSP LT(2, KC_BSPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [0] = LAYOUT_south_ortho_3x10(
-    KC_QESC, KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_PBSP,
+    KC_QESC, KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
     KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_LENT,
-    KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_LBSP, KC_SPC,  KC_BCOM, KC_NDOT, KC_MSLS, KC_GRV
+    KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_LBSP, KC_SPC,  KC_BCOM, KC_NDOT, KC_MSLS, KC_GRSF
   ),
 
   [1] = LAYOUT_south_ortho_3x10(
-    _______, _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   KC_BSPC,
     _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_RGHT, _______,
     _______, _______, _______, _______, _______, _______, RESET,   KC_DOWN, KC_DOWN, KC_BSLS
   ),
@@ -89,6 +90,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_LALT) {
           SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_TAB));
+        // } else if (get_mods() & MOD_MASK_LGUI) {
+        //   SEND_STRING(SS_DOWN())
         } else if (get_mods() & MOD_MASK_LGUI) {
           SEND_STRING(SS_UP(X_LGUI) SS_DOWN(X_LALT) SS_TAP(X_A) SS_UP(X_LALT));
         } else {
