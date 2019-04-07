@@ -1,6 +1,5 @@
 /*
-Copyright 2012 Jun Wako <wakojun@gmail.com>
-Copyright 2015 Jack Humbert
+Copyright 2017 Luiz Ribeiro <luizribeiro@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,27 +16,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+
 #include "config_common.h"
 
-/* Use I2C or Serial, not both */
-#define USE_I2C
-#define SCL_CLOCK  800000UL
+#define VENDOR_ID       0x20A0
+#define PRODUCT_ID      0x422D
+#define MANUFACTURER    DonutCables
+#define PRODUCT         budget96
 
-/* Select hand configuration */
-#define MASTER_LEFT
+#define RGBLED_NUM 16
 
-//#define DEBUG_MATRIX_SCAN_RATE //Use this to determine scan-rate.
-#define FORCE_NKRO
+#define MATRIX_ROWS 8
+#define MATRIX_COLS 15
 
-#define QMK_KEYS_PER_SCAN 4 //if we press four keys simultaneously, lets process them simultaneously...
+#define MATRIX_COL_PINS { A0, A1, A2, A3, A4, A5, A6, A7, C7, C6, C5, C4, C3, C2, D7 }
+#define MATRIX_ROW_PINS { B0, B1, B2, B3, B4, B5, B6, B7 }
+#define UNUSED_PINS
+
 #define DIODE_DIRECTION COL2ROW
+#define DEBOUNCING_DELAY 5
 
+#define NO_BACKLIGHT_CLOCK
+#define BACKLIGHT_LEVELS 1
+#define RGBLIGHT_ANIMATIONS
 
-#ifdef AUDIO_ENABLE
-  #define C6_AUDIO
-  #define STARTUP_SONG SONG(STARTUP_SOUND)
-  #define NO_MUSIC_MODE
-  #define TONE_QWERTY SONG(Q__NOTE(_E4));
-  #define TONE_NUMPAD SONG(Q__NOTE(_D4));
-#endif
+// Set bootmagic lite key to the key commonly programmed as Esc. 
+#define BOOTMAGIC_LITE_ROW 5
+#define BOOTMAGIC_LITE_COLUMN 0 
 
+/* key combination for command */

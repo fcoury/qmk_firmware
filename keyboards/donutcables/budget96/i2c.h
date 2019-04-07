@@ -1,9 +1,5 @@
 /*
-This is the c configuration file for the keyboard
-
-Copyright 2012 Jun Wako <wakojun@gmail.com>
-Copyright 2017 Jack Humbert
-Copyright 2017 Art Ortenburger
+Copyright 2016 Luiz Ribeiro <luizribeiro@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,9 +15,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIG_H
-#define CONFIG_H
+// Please do not modify this file
 
-#include "config_common.h"
-    
-#endif
+#pragma once
+
+void i2c_init(void);
+void i2c_set_bitrate(uint16_t bitrate_khz);
+uint8_t i2c_send(uint8_t address, uint8_t *data, uint16_t length);

@@ -1,4 +1,4 @@
-# Copyright 2019 Luiz Ribeiro <luizribeiro@gmail.com>
+# Copyright 2017 Luiz Ribeiro <luizribeiro@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,18 +31,19 @@ F_CPU = 12000000
 BOOTLOADER = bootloadHID
 
 # build options
-BOOTMAGIC_ENABLE = full
-MOUSEKEY_ENABLE = no
+BOOTMAGIC_ENABLE = lite
+MOUSEKEY_ENABLE = yes
 EXTRAKEY_ENABLE = yes
 CONSOLE_ENABLE = yes
 COMMAND_ENABLE = yes
-BACKLIGHT_ENABLE = no
-RGBLIGHT_ENABLE = no
+BACKLIGHT_ENABLE = yes
+RGBLIGHT_ENABLE = yes
 RGBLIGHT_CUSTOM_DRIVER = yes
 
 OPT_DEFS = -DDEBUG_LEVEL=0
 
-SRC += i2c_master.c
+# custom matrix setup
+SRC = i2c.c
 
 # programming options
 PROGRAM_CMD = ./util/atmega32a_program.py $(TARGET).hex
