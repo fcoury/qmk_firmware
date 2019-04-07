@@ -56,18 +56,18 @@ enum custom_key_codes {
 #define KC_VALT MT(MOD_LALT, KC_V)
 #define KC_GRSF MT(MOD_RSFT, KC_GRV)
 #define KC_LENT LT(1, KC_ENT)
-#define KC_LBSP LT(2, KC_BSPC)
+#define KC_LSPC LT(2, KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [0] = LAYOUT(
     KC_QESC, KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
     KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_LENT,
-    KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_SPC,  KC_BCOM, KC_NDOT, KC_MSLS
+    KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_LSPC, KC_BCOM, KC_NDOT, KC_MSLS
   ),
 
   [1] = LAYOUT(
-    _______, _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   KC_BSPC,
+    KC_BSPC, _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   KC_BSPC,
     _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_RGHT, _______,
     _______, _______, _______, _______, _______, RESET,   KC_DOWN, KC_DOWN
   ),
