@@ -612,9 +612,12 @@ static void send_keyboard(report_keyboard_t *report)
     uint8_t timeout = 255;
     uint8_t where = where_to_send();
 
+    xprintf("Where: %d\n", where);
+
 #ifdef BLUETOOTH_ENABLE
   if (where == OUTPUT_BLUETOOTH || where == OUTPUT_USB_AND_BT) {
     #ifdef MODULE_ADAFRUIT_BLE
+    print("Sending to BLE\n");
       adafruit_ble_send_keys(report->mods, report->keys, sizeof(report->keys));
     #elif MODULE_RN42
       bluefruit_serial_send(0xFD);
@@ -666,7 +669,7 @@ static void send_keyboard(report_keyboard_t *report)
 
     keyboard_report_sent = *report;
 }
- 
+
 /** \brief Send Mouse
  *
  * FIXME: Needs doc
@@ -1087,7 +1090,7 @@ int main(void)
 #endif
 
 #ifdef MODULE_ADAFRUIT_BLE
-        adafruit_ble_task();
+        // adafruit_ble_task();
 #endif
 
 #ifdef VIRTSER_ENABLE

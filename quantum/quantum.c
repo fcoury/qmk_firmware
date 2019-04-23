@@ -77,6 +77,10 @@ extern backlight_config_t backlight_config;
   #endif
 #endif
 
+#ifdef MODULE_ADAFRUIT_BLE
+    #include "adafruit_ble.h"
+#endif
+
 static void do_code16 (uint16_t code, void (*f) (uint8_t)) {
   switch (code) {
   case QK_MODS ... QK_MODS_MAX:
@@ -585,6 +589,7 @@ bool process_record_quantum(keyrecord_t *record) {
     #ifdef BLUETOOTH_ENABLE
     case OUT_BT:
       if (record->event.pressed) {
+        adafruit_ble_task();
         set_output(OUTPUT_BLUETOOTH);
       }
       return false;
@@ -1331,10 +1336,10 @@ void backlight_task(void) {
 // (which is not possible since the backlight is not wired to PWM pins on the
 // CPU), we do the LED on/off by oursleves.
 // The timer is setup to count up to 0xFFFF, and we set the Output Compare
-// register to the current 16bits backlight level (after CIE correction). 
-// This means the CPU will trigger a compare match interrupt when the counter 
-// reaches the backlight level, where we turn off the LEDs, 
-// but also an overflow interrupt when the counter rolls back to 0, 
+// register to the current 16bits backlight level (after CIE correction).
+// This means the CPU will trigger a compare match interrupt when the counter
+// reaches the backlight level, where we turn off the LEDs,
+// but also an overflow interrupt when the counter rolls back to 0,
 // in which we're going to turn on the LEDs.
 // The LED will then be on for OCRxx/0xFFFF time, adjusted every 244Hz.
 
@@ -1346,7 +1351,7 @@ ISR(TIMERx_COMPA_vect) {
 }
 
 // Triggered when the counter reaches the TOP value
-// this one triggers at F_CPU/65536 =~ 244 Hz 
+// this one triggers at F_CPU/65536 =~ 244 Hz
 ISR(TIMERx_OVF_vect) {
 #ifdef BACKLIGHT_BREATHING
   breathing_task();
