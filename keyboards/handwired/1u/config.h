@@ -12,12 +12,12 @@
 #define DESCRIPTION     Handwired Keyboard
 
 /* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 1
+#define MATRIX_ROWS 2
+#define MATRIX_COLS 2
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS { F6 }
-#define MATRIX_COL_PINS { F1 }
+#define MATRIX_ROW_PINS { F6, B7 }
+#define MATRIX_COL_PINS { F1, D7 }
 #define UNUSED_PINS
 
 /* COL2ROW or ROW2COL */
