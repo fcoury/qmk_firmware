@@ -768,9 +768,10 @@ bool adafruit_ble_send_consumer_key(uint16_t keycode, int hold_duration) {
   item.queue_type = QTConsumer;
   item.consumer = keycode;
 
-  while (!send_buf.enqueue(item)) {
-    send_buf_send_one();
-  }
+//   while (!send_buf.enqueue(item)) {
+//     send_buf_send_one();
+//   }
+  process_queue_item(&item, SdepTimeout);
   return true;
 }
 
@@ -786,9 +787,10 @@ bool adafruit_ble_send_mouse_move(int8_t x, int8_t y, int8_t scroll,
   item.mousemove.pan = pan;
   item.mousemove.buttons = buttons;
 
-  while (!send_buf.enqueue(item)) {
-    send_buf_send_one();
-  }
+  // while (!send_buf.enqueue(item)) {
+  //   send_buf_send_one();
+  // }
+  process_queue_item(&item, SdepTimeout);
   return true;
 }
 #endif
