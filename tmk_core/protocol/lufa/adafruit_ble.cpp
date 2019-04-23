@@ -741,14 +741,15 @@ bool adafruit_ble_send_keys(uint8_t hid_modifier_mask, uint8_t *keys,
     item.key.keys[4] = nkeys >= 4 ? keys[4] : 0;
     item.key.keys[5] = nkeys >= 5 ? keys[5] : 0;
 
-    if (!send_buf.enqueue(item)) {
-      if (!didWait) {
-        dprint("wait for buf space\n");
-        didWait = true;
-      }
-      send_buf_send_one();
-      continue;
-    }
+    // if (!send_buf.enqueue(item)) {
+    //   if (!didWait) {
+    //     print("wait for buf space\n");
+    //     didWait = true;
+    //   }
+    //   send_buf_send_one();
+    //   continue;
+    // }
+    process_queue_item(&item, SdepTimeout);
 
     if (nkeys <= 6) {
       return true;
