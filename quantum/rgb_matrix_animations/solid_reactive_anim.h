@@ -2,6 +2,7 @@
 #if defined(RGB_MATRIX_KEYREACTIVE_ENABLED)
 #ifndef DISABLE_RGB_MATRIX_SOLID_REACTIVE
 
+extern led_config_t g_led_config;
 extern rgb_config_t rgb_matrix_config;
 extern last_hit_t g_last_hit_tracker;
 
@@ -15,7 +16,8 @@ bool rgb_matrix_solid_reactive(effect_params_t* params) {
   for (uint8_t i = led_min; i < led_max; i++) {
     RGB_MATRIX_TEST_LED_FLAGS();
     uint16_t tick = max_tick;
-    for(uint8_t j = 0; j < g_last_hit_tracker.count; j++) {
+    // Reverse search to find most recent key hit
+    for (int8_t j = g_last_hit_tracker.count - 1; j >= 0; j--) {
       if (g_last_hit_tracker.index[j] == i && g_last_hit_tracker.tick[j] < tick) {
         tick = g_last_hit_tracker.tick[j];
         break;
