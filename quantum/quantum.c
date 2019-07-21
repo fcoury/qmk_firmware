@@ -1510,7 +1510,6 @@ void backlight_init_ports(void)
       breathing_enable();
     }
   #endif
-  #endif
 }
 
 #endif // hardware backlight
