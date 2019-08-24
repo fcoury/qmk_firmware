@@ -79,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 	[_CTRL] = LAYOUT(
-    RESET,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_UP  , KC_UP, KC_DEL , \
-    _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGUP, KC_LEFT, KC_RGHT, KC_RGHT, _______, \
-    _______, KC_PSCR, KC_LSCR, _______, _______, _______, _______, KC_PGDN, KC_DOWN, KC_DOWN, _______,          \
+    RESET,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_UP,   KC_UP, KC_DEL , \
+    _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, KC_PGUP, KC_LEFT, KC_RGHT, _______, \
+    _______, KC_PSCR, KC_LSCR, _______, _______, _______, _______, _______, KC_PGDN, KC_DOWN, _______,          \
     _______, _______, _______, _______, _______, _______, _______, _______
 	),
 };
