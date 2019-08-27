@@ -3,10 +3,12 @@
 // Layer shorthand
 enum layers {
     _BASE = 0, // Base
+    _WIN,      // Windows
     _CTRL      // Extras
 };
 
 #define MODS_CTRL_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define KC_TWIN TG(_WIN)
 
 const uint8_t RGBLED_RAINBOW_SWIRL_INTERVALS[] PROGMEM = {10, 5, 5};
 
@@ -34,12 +36,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    		KC_LALT, KC_LALT, KC_LGUI, KC_SPC, KC_SPC, KC_SPC, KC_RGUI, KC_RGUI, KC_RGUI, KC_RALT, KC_LALT
       ),
 
+  [_WIN] = LAYOUT(
+      _______, _______,  _______,    _______,   _______,   _______,   _______,    _______,    _______,    _______,    _______,    _______, _______,  _______, _______,
+      _______, _______,  _______,    _______,   _______,   _______,   _______,    _______,    _______,    _______,    _______,    _______, _______, _______,
+      _______, _______,  _______,    _______,   _______,   _______,   _______,    _______,    _______,    _______,    _______, _______,       _______,
+      _______, _______,  _______,    _______,   _______,   _______,   _______,    _______,    _______,    _______, _______,  _______, _______, _______,
+   		KC_LCTL, _______, KC_LALT, _______, _______, _______, _______, _______, _______, _______, _______
+      ),
+
   [_CTRL] = LAYOUT(
       KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12, _______, KC_DEL,
       _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_HOME, KC_END,  KC_UP,    _______, RESET,
       _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, KC_HOME, KC_PGUP, KC_LEFT, KC_RIGHT, _______,
       _______, _______, KC_PSCR, KC_SLCK, _______, _______, _______, _______, _______, KC_END,  KC_PGDN, KC_DOWN,  _______, _______,
-		  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+		  _______, _______, _______, _______, _______, _______, KC_TWIN, KC_TWIN, KC_TWIN, _______, _______
       ),
 };
 
