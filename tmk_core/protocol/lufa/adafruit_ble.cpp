@@ -325,10 +325,11 @@ static void resp_buf_read_one(bool greedy) {
 
 again:
     if (sdep_recv_pkt(&msg, SdepTimeout)) {
+      uprintf("received msg: %u %u %u %u\n", msg.type, msg.len, msg.more, last_send);
       if (!msg.more) {
         // We got it; consume this entry
         resp_buf.get(last_send);
-        dprintf("recv latency %dms\n", TIMER_DIFF_16(timer_read(), last_send));
+        uprintf("recv latency %dms\n", TIMER_DIFF_16(timer_read(), last_send));
       }
 
       if (greedy && resp_buf.peek(last_send) && digitalRead(AdafruitBleIRQPin)) {
@@ -337,7 +338,7 @@ again:
     }
 
   } else if (timer_elapsed(last_send) > SdepTimeout * 2) {
-    dprintf("waiting_for_result: timeout, resp_buf size %d\n",
+    uprintf("waiting_for_result: timeout, resp_buf size %d\n",
             (int)resp_buf.size());
 
     // Timed out: consume this entry
@@ -359,7 +360,7 @@ static void send_buf_send_one(uint16_t timeout = SdepTimeout) {
   if (process_queue_item(&item, timeout)) {
     // commit that peek
     send_buf.get(item);
-    dprintf("send_buf_send_one: have %d remaining\n", (int)send_buf.size());
+    uprintf("send_buf_send_one: have %d remaining\n", (int)send_buf.size());
   } else {
     dprint("failed to send, will retry\n");
     _delay_ms(SdepTimeout);
@@ -371,7 +372,7 @@ static void resp_buf_wait(const char *cmd) {
   bool didPrint = false;
   while (!resp_buf.empty()) {
     if (!didPrint) {
-      dprintf("wait on buf for %s\n", cmd);
+      uprintf("wait on buf for %s\n", cmd);
       didPrint = true;
     }
     resp_buf_read_one(true);
@@ -414,7 +415,7 @@ static bool read_response(char *resp, uint16_t resplen, bool verbose) {
     struct sdep_msg msg;
 
     if (!sdep_recv_pkt(&msg, 2 * SdepTimeout)) {
-      dprint("sdep_recv_pkt failed\n");
+      print("sdep_recv_pkt failed\n");
       return false;
     }
 
@@ -459,8 +460,8 @@ static bool read_response(char *resp, uint16_t resplen, bool verbose) {
 
   success = !strcmp_P(last_line, kOK );
 
-  if (verbose || !success) {
-    dprintf("result: %s\n", resp);
+  if (true || !success) {
+    uprintf("result: %s\n", resp);
   }
   return success;
 }
@@ -470,9 +471,9 @@ static bool at_command(const char *cmd, char *resp, uint16_t resplen,
   const char *end = cmd + strlen(cmd);
   struct sdep_msg msg;
 
-  if (verbose) {
-    dprintf("ble send: %s\n", cmd);
-  }
+  // if (verbose) {
+    uprintf("ble send: %s\n", cmd);
+  // }
 
   if (resp) {
     // They want to decode the response, so we need to flush and wait
@@ -503,7 +504,7 @@ static bool at_command(const char *cmd, char *resp, uint16_t resplen,
     }
     auto later = timer_read();
     if (TIMER_DIFF_16(later, now) > 0) {
-      dprintf("waited %dms for resp_buf\n", TIMER_DIFF_16(later, now));
+      uprintf("waited %dms for resp_buf\n", TIMER_DIFF_16(later, now));
     }
     return true;
   }
@@ -565,10 +566,12 @@ bool adafruit_ble_enable_keyboard(void) {
     memcpy_P(&cmd, configure_commands + i, sizeof(cmd));
 
     if (!at_command_P(cmd, resbuf, sizeof(resbuf))) {
-      dprintf("failed BLE command: %S: %s\n", cmd, resbuf);
+      uprintf("failed BLE command: %S: %s\n", cmd, resbuf);
       goto fail;
     }
   }
+
+  // at_command_P(PSTR("ATZ"), resbuf, sizeof(resbuf));
 
   state.configured = true;
 
@@ -583,6 +586,11 @@ static void set_connected(bool connected) {
   if (connected != state.is_connected) {
     if (connected) {
       print("****** BLE CONNECT!!!!\n");
+
+      char resbuf[128];
+      // at_command_P(PSTR("AT+BLEHIDEN=1"), resbuf, sizeof(resbuf));
+      // at_command_P(PSTR("ATZ"), resbuf, sizeof(resbuf));
+      at_command_P(PSTR("AT+BLEKEYBOARD=Felipe"), resbuf, sizeof(resbuf));
     } else {
       print("****** BLE DISCONNECT!!!!\n");
     }
@@ -631,10 +639,10 @@ void adafruit_ble_task(void) {
       // Note that at the time of writing, HID reports only work correctly
       // with Apple products on firmware version 0.6.7!
       // https://forums.adafruit.com/viewtopic.php?f=8&t=104052
-      if (at_command_P(PSTR("AT+EVENTENABLE=0x1"), resbuf, sizeof(resbuf))) {
-        at_command_P(PSTR("AT+EVENTENABLE=0x2"), resbuf, sizeof(resbuf));
-        state.event_flags |= UsingEvents;
-      }
+      // if (at_command_P(PSTR("AT+EVENTENABLE=0x1"), resbuf, sizeof(resbuf))) {
+      //   at_command_P(PSTR("AT+EVENTENABLE=0x2"), resbuf, sizeof(resbuf));
+      //   state.event_flags |= UsingEvents;
+      // }
       state.event_flags |= ProbedEvents;
 
       // leave shouldPoll == true so that we check at least once
@@ -675,7 +683,7 @@ static bool process_queue_item(struct queue_item *item, uint16_t timeout) {
 
 #if 1
   if (TIMER_DIFF_16(state.last_connection_update, item->added) > 0) {
-    dprintf("send latency %dms\n",
+    uprintf("send latency %dms\n",
             TIMER_DIFF_16(state.last_connection_update, item->added));
   }
 #endif
@@ -687,7 +695,11 @@ static bool process_queue_item(struct queue_item *item, uint16_t timeout) {
       snprintf(cmdbuf, sizeof(cmdbuf), fmtbuf, item->key.modifier,
                item->key.keys[0], item->key.keys[1], item->key.keys[2],
                item->key.keys[3], item->key.keys[4], item->key.keys[5]);
-      return at_command(cmdbuf, NULL, 0, true, timeout);
+      uprintf("sending: %s\n", cmdbuf);
+      char resbuf[48];
+      at_command(cmdbuf, resbuf, sizeof(resbuf), true, timeout);
+      uprintf("got: %s\n", resbuf);
+      return 1;
 
     case QTConsumer:
       strcpy_P(fmtbuf, PSTR("AT+BLEHIDCONTROLKEY=0x%04x"));
@@ -726,6 +738,11 @@ bool adafruit_ble_send_keys(uint8_t hid_modifier_mask, uint8_t *keys,
                             uint8_t nkeys) {
   struct queue_item item;
   bool didWait = false;
+
+  for (uint8_t i = 0; i < 6; i++) {
+    uprintf("%02X ", keys[i]);
+  }
+  uprintf("send_keys: %u %u %u\n", hid_modifier_mask, keys, nkeys);
 
   item.queue_type = QTKeyReport;
   item.key.modifier = hid_modifier_mask;

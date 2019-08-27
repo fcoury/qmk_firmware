@@ -2,5 +2,5 @@
 
 void matrix_init_kb() {
   // auto detect output on init
-  set_output(OUTPUT_USB);
+  set_output(OUTPUT_BLUETOOTH);
 }

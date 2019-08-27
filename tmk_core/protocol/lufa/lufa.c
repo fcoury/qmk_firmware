@@ -614,6 +614,7 @@ static void send_keyboard(report_keyboard_t *report)
 
 #ifdef BLUETOOTH_ENABLE
   if (where == OUTPUT_BLUETOOTH || where == OUTPUT_USB_AND_BT) {
+    print("Bluetooth\n");
     #ifdef MODULE_ADAFRUIT_BLE
       adafruit_ble_send_keys(report->mods, report->keys, sizeof(report->keys));
     #elif MODULE_RN42
@@ -666,7 +667,7 @@ static void send_keyboard(report_keyboard_t *report)
 
     keyboard_report_sent = *report;
 }
- 
+
 /** \brief Send Mouse
  *
  * FIXME: Needs doc
