@@ -33,12 +33,14 @@ enum {
   TD_K_SCL,
   TD_L_QUO,
   TD_V_MOD,
+  TD_EN_BS,
 };
 
 enum custom_key_codes {
   KC_ATAB = 0,
 };
 
+#define KC_ENBS TD(TD_EN_BS)
 #define KC_QESC TD(TD_Q_ESC)
 #define KC_ATAB TD(TD_A_TAB)
 #define KC_PBSP TD(TD_P_BSP)
@@ -62,14 +64,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [0] = LAYOUT(
     KC_QESC, KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-    KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_LENT,
+    KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_ENBS,
     KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_LSPC, KC_BCOM, KC_NDOT, KC_MSLS
   ),
 
   [1] = LAYOUT(
-    KC_BSPC, _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   KC_BSPC,
-    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_RGHT, _______,
-    _______, _______, _______, _______, _______, RESET,   KC_DOWN, KC_DOWN
+    KC_GRV,  _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   KC_BSPC,
+    KC_BSPC, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_RGHT, _______,
+    _______, _______, _______, _______, RESET,   RESET,   KC_DOWN, KC_DOWN
   ),
 
   [2] = LAYOUT(
@@ -162,9 +164,29 @@ void v_reset(qk_tap_dance_state_t *state, void *user_data) {
   vtap_state.state = 0;
 }
 
+void en_finished(qk_tap_dance_state_t *state, void *user_data) {
+  vtap_state.state = cur_dance(state);
+  switch (vtap_state.state) {
+    case SINGLE_TAP: register_code(KC_ENT); break;
+    case SINGLE_HOLD: layer_on(1); break;
+    case DOUBLE_TAP: register_code(KC_BSPC); break;
+  }
+}
+
+void en_reset(qk_tap_dance_state_t *state, void *user_data) {
+  switch (vtap_state.state) {
+    case SINGLE_TAP: unregister_code(KC_ENT); break;
+    case SINGLE_HOLD: layer_off(1); break;
+    case DOUBLE_TAP: unregister_code(KC_BSPC); break;
+  }
+  vtap_state.state = 0;
+}
+
+
 qk_tap_dance_action_t tap_dance_actions[] = {
   // V is V on tap, ALT on hold, Alt+V (paste) on double tap
   [TD_V_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, v_finished, v_reset),
+  [TD_EN_BS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, en_finished, en_reset),
 
   // top row keys
   [TD_Q_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
