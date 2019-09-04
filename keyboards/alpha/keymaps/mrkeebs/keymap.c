@@ -64,20 +64,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [0] = LAYOUT(
     KC_QESC, KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-    KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_ENBS,
+    KC_ATAB, KC_S,    KC_D,    KC_F,    KC_G,    KC_HEQL, KC_JMIN, KC_KSCL, KC_L   , KC_LENT,
     KC_ZSFT, KC_XGUI, KC_CGUI, KC_VMOD, KC_LSPC, KC_BCOM, KC_NDOT, KC_MSLS
   ),
 
   [1] = LAYOUT(
     KC_GRV,  _______, _______, _______, _______, _______, _______, KC_UP  , KC_UP,   KC_BSPC,
     KC_BSPC, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_RGHT, _______,
-    _______, _______, _______, _______, RESET,   RESET,   KC_DOWN, KC_DOWN
+    _______, _______, _______, _______, KC_BSPC,   RESET,   KC_DOWN, KC_DOWN
   ),
 
   [2] = LAYOUT(
     KC_1,    KC_2,    KC_3,    KC_4   , KC_5   , KC_6   , KC_7   , KC_8   , KC_9   , KC_0   ,
     KC_TAB , _______, _______, _______, _______, KC_EQL , KC_MINS, KC_SCLN, KC_QUOT, _______,
-    _______, _______, _______, _______, _______, KC_COMM, KC_LBRC, KC_RBRC
+    KC_BSLS, _______, _______, _______, _______, KC_COMM, KC_LBRC, KC_RBRC
   ),
 
 };
