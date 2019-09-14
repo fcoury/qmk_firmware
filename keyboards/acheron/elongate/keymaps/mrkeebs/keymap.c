@@ -1,4 +1,4 @@
-/* Copyright 2019 Gondolindrim
+/* Copyright 2019 MrKeebs
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,8 @@ enum layers {
 #define MC_MUTE LCTL(LALT(LGUI(KC_0)))
 #define MC_VOLD LCTL(LALT(LGUI(KC_MINS)))
 #define MC_VOLU LCTL(LALT(LGUI(KC_EQL)))
+
+const uint8_t RGBLED_RAINBOW_SWIRL_INTERVALS[] PROGMEM = {10, 5, 5};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT( /* Base */
