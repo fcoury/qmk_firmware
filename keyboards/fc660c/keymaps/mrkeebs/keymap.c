@@ -35,5 +35,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-};
+void matrix_init_user(void) {
+  setPinOutput(B5);
+}
+
+  uint32_t layer_state_set_user(uint32_t state) {
+    writePin(B5, !biton32(state));
+    return state;
+  }
