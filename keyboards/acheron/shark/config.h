@@ -1,5 +1,5 @@
 /*
-Copyright 2019 %YOUR_NAME%
+Copyright 2019 Alvaro Volpato and Steve
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,11 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x0000
+#define PRODUCT_ID      0xAC11
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    WoodCables
-#define PRODUCT         Shark
-#define DESCRIPTION     A custom keyboard
+#define MANUFACTURER    AcheronProject
+#define PRODUCT         SharkPCB
+#define DESCRIPTION     Ortho 40 PCB
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -41,12 +41,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
 */
-#define MATRIX_ROW_PINS { B4, A15, B10, B2 }
-#define MATRIX_COL_PINS { B1, B12, A1, A6, A5, A4, A3, A2, A0, C5, C14, C13 }
-#define UNUSED_PINS
+#define MATRIX_ROW_PINS {B4, A15, B10, B2}
+#define MATRIX_COL_PINS {B1, B12, A1, A7, A5, A4, A3, A2, A0, C15, C14, C13}
+//{C13, C14, C15, A0,A2,A3,A4,A5,A6, A1,B12,B1}
+/* Unused pins, in the default layout, are:
+EncA (B6) because it is not used in the default PCB
+All Extra pins (A8, B15, B14, B13, B3, B5, B8, B9) , for the same reason;
+B0, which is unconnected on the PCB
+*/
+//#define UNUSED_PINS { B0, B6, B13, B14, B15, B8, B9, B5, B3 }
 
 /* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION COL2ROW
+
+#define BACKLIGHT_PIN B0
+#define BACKLIGHT_PWM_DRIVER PWMD3
+#define BACKLIGHT_PWM_CHANNEL 3
 
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
