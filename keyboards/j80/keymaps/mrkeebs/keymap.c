@@ -21,6 +21,10 @@ enum layer_names {
     _FN
 };
 
+enum custom_keycodes {
+  MK_TLED = SAFE_RANGE,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_all(
   KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,           KC_PSCR, KC_SLCK, KC_PAUS,
@@ -31,13 +35,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_APP,  KC_RALT, KC_RGUI, MO(_FN), KC_LEFT, KC_DOWN, KC_RGHT),
 
 [_FN] = LAYOUT_all(
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
+  MK_TLED, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
   KC_GRV,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,   _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
   _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______, _______),
 };
+
+bool leds_flag;
 void keyboard_pre_init_user(void) {
   // Set our LED pins as output
   setPinOutput(D1);
@@ -47,12 +53,26 @@ void keyboard_pre_init_user(void) {
   writePin(D1, true);
   writePin(D6, true);
   writePin(D0, true);
+
+  leds_flag = true;
 }
 
 bool led_update_user(led_t led_state) {
-  writePin(D1, !(layer_state & (1<<1))); // Caps Lock
-  writePin(D6, !(layer_state & (1<<1))); // Scroll Lock
-  writePin(D0, !(layer_state & (1<<1))); // Num Lock
+  bool is_layer_on = layer_state & (1<<1);
+  bool leds_on = leds_flag ? !is_layer_on : is_layer_on;
+  writePin(D1, leds_on); // Caps Lock
+  writePin(D6, leds_on); // Scroll Lock
+  writePin(D0, leds_on); // Num Lock
   return false;
 }
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MK_TLED:
+      if (!record->event.pressed) {
+        leds_flag = !leds_flag;
+      }
+      break;
+  }
+  return true;
+};
