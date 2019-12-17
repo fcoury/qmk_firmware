@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "i2c_master.h"
+#include <stdio.h>
 
 enum layers {
     _BASE = 0, // Base
@@ -45,3 +47,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______, KC_PGDN, KC_DOWN,   _______,  _______,
     _______,  _______,  _______,                                _______,                                _______,  _______,  KC_TWIN,  _______),
 };
+
+uint8_t send_data;
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+      case _WIN:
+        send_data = 0x18;
+        break;
+      case _CTRL:
+        send_data = 0x18;
+        break;
+      default: //  for any other layers, or the default layer
+        send_data = 0x10;
+        break;
+    }
+    i2c_writeReg((PORT_EXPANDER_ADDRESS << 1), 0x09, &send_data, 1, 20);
+    return state;
+}
+
+void led_set_kb(uint8_t usb_led) {
+}

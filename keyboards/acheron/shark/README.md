@@ -1,7 +1,7 @@
 # Acheron Aχξρων 40-SM-O-MX-TH-WI (Codename "SharkPCB") QMK firmware
 
 <p align="center">
-  <img align="middle" src="https://raw.githubusercontent.com/Gondolindrim/acheronLibrary/master/graphics/acheronLong.png"  width="400">
+  <img align="middle" src="https://raw.githubusercontent.com/Gondolindrim/acheronLibrary/master/graphics/acheronLong.png"  width="400"> 
 </p>
 
 This is the QMK firmware repository for the Shark, updated until [revision Alpha](https://github.com/Gondolindrim/SharkPCB/releases/tag/Alpha).
