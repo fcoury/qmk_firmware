@@ -18,24 +18,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x0159
-#define PRODUCT_ID      0xA71C
+#define VENDOR_ID       0xAC11
+#define PRODUCT_ID      0x4175
 #define DEVICE_VER      0x0001
-/* in python2: list(u"whatever".encode('utf-16-le')) */
-/*   at most 32 characters or the ugly hack in usb_main.c borks */
-#define MANUFACTURER Acheron_Project
-#define PRODUCT Austin
-#define DESCRIPTION Acheron_Project_Austin
+#define MANUFACTURER    DriftMechanics
+#define PRODUCT         Austin
+#define DESCRIPTION     Austin Keyboard
 
 /* key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 19
 
-#define MATRIX_COL_PINS { B2, B10, B12, B13, B14, B15, A8, A9, A10, A5, A15, B3, B4, B5, B8, A2, C15, C14, F1 }
-#define MATRIX_ROW_PINS { C13, A1, A6, A7, B0, B1 }
+#define MATRIX_COL_PINS { B10, B11, B12, B13, B14, B15, A8, A9, A10, A5, A15, B3, B4, B5, B8, A3, C15, C14, F1 }
+#define MATRIX_ROW_PINS { C13, A4, A7, B0, B1, B2 }
 #define DIODE_DIRECTION COL2ROW
 
-#define BACKLIGHT_LEVELS 24
+#define BACKLIGHT_PIN           A6
+#define BACKLIGHT_PWM_DRIVER    PWMD3
+#define BACKLIGHT_PWM_CHANNEL   1
+#define BACKLIGHT_PAL_MODE      1
+#define BACKLIGHT_LEVELS 6
 #define BACKLIGHT_BREATHING
 #define BREATHING_PERIOD 6
 
@@ -49,30 +51,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
-
-#define RGBLIGHT_ANIMATIONS
-
-//#define WS2812_LED_N 14
-//#define RGBLED_NUM WS2812_LED_N
-//#define PORT_WS2812     GPIOB
-//#define PIN_WS2812      15
-//#define WS2812_SPI SPID2
-
-
-
-// EEPROM usage
-// TODO: refactor with new user EEPROM code (coming soon)
-#define EEPROM_MAGIC 0x451F
-#define EEPROM_MAGIC_ADDR 32
-// Bump this every time we change what we store
-// This will automatically reset the EEPROM with defaults
-// and avoid loading invalid data from the EEPROM
-#define EEPROM_VERSION 0x01
-#define EEPROM_VERSION_ADDR 34
-
-#define EEPROM_CUSTOM_BACKLIGHT 804
-
-
 
 /*
  * Feature disable options
