@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_CTRL] = LAYOUT_all( /* Keyboard Functions Control */
     RESET,   _______, _______, _______, _______, _______, _______, KC_HOME, KC_END,  KC_UP,   _______, KC_DEL,
-    _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, KC_PGUP, KC_LEFT, KC_RGHT, _______,
+    _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGUP, KC_LEFT, KC_RGHT, _______, _______,
     _______, KC_PSCR, KC_LSCR, _______, _______, _______, _______, _______, KC_PGDN, KC_DOWN, _______, _______,
     _______, _______, _______,          _______,          _______,     _______,      _______, _______, _______
   )
