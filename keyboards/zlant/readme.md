@@ -5,8 +5,8 @@
 A compact 40% inspired by the Plank with a staggered layout instead.
 
 Keyboard Maintainer: [Felipe Coury](https://github.com/fcoury)  
-Hardware Supported: Zlant Prototype PCB  
-Hardware Availability: Group buy soon
+Hardware Supported: Zlant Prototype PCB to Zlant PCB revision 4
+Hardware Availability: [at 1UP Keyboards](https://www.1upkeyboards.com/shop/keyboard-kits/diy-40-kits/zlant-40-keyboard-kit/)
 
 Make example for this keyboard (after setting up your build environment):
 
